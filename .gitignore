@@ -1,0 +1,22 @@
+# Solution folder - contains implemented code
+solution/
+
+# Maven build artifacts
+target/
+*.class
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+

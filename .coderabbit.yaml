@@ -1,0 +1,120 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: en-US
+tone_instructions: "Be concise and focus on critical issues only"
+early_access: false
+enable_free_tier: true
+
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  high_level_summary_placeholder: '@coderabbitai summary'
+  auto_title_placeholder: '@coderabbitai'
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  path_filters:
+    - "src/**"
+  path_instructions:
+    - path: "src/main/java/**"
+      instructions: |
+        nl.blitz.oop.bank exercise — apply these during review:
+
+        • Package hygiene
+          - All classes declare: package nl.blitz.oop.bank;
+
+        • Files / Classes
+          - Ensure files exist:
+              src/main/java/nl/blitz/oop/bank/BankAccount.java
+              src/main/java/nl/blitz/oop/bank/Demo.java
+          - BankAccount.java declares: public class BankAccount
+          - Demo.java declares: public class Demo with main method
+
+        • Encapsulation
+          - BankAccount fields are private
+          - holder should be final or treated as immutable
+          - No public mutable fields or setters
+
+        • Constructor
+          - public BankAccount(String, double)
+          - Validates: holder non-null/non-blank, initialBalance >= 0
+          - Throws IllegalArgumentException on invalid input
+
+        • Operations
+          - deposit(double): amount > 0 else IllegalArgumentException
+          - withdraw(double): amount > 0 && <= balance else IllegalArgumentException
+          - getBalance() and getHolder() return proper values
+          - printSummary() returns "Account: {holder} | Balance: {balance}"
+
+        • Demo behavior
+          - Demo.main creates multiple BankAccount instances
+          - Performs deposits/withdrawals with valid values
+          - Prints summaries via printSummary()
+          - Uses getters for balance if needed
+
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    ignore_title_keywords:
+      - "wip"
+      - "draft"
+
+pre_merge_checks:
+  custom_checks:
+    - mode: error
+      name: "Files exist"
+      instructions: >
+        Fail if required files are missing or mislocated.
+
+    - mode: error
+      name: "Package hygiene"
+      instructions: >
+        Fail if package declarations are missing or incorrect.
+
+    - mode: error
+      name: "Constructor validation"
+      instructions: >
+        Fail if constructor does not perform validation and throw IllegalArgumentException for invalid inputs.
+
+    - mode: error
+      name: "Operation validation"
+      instructions: >
+        Fail if deposit() or withdraw() do not include input checks and throw IllegalArgumentException for invalid operations.
+
+    - mode: error
+      name: "Encapsulation"
+      instructions: >
+        Fail if fields are not private or if setters exist.
+
+    - mode: error
+      name: "Demo prints summaries"
+      instructions: >
+        Fail if Demo.main does not instantiate multiple BankAccount objects, perform valid transactions, and print summaries.
+
+tools:
+  github-checks:
+    enabled: true
+  markdownlint:
+    enabled: true
+  yamllint:
+    enabled: true
+  gitleaks:
+    enabled: true
+  pmd:
+    enabled: true
+  semgrep:
+    enabled: true
+
+chat:
+  auto_reply: true
+
+knowledge_base:
+  opt_out: false
+  web_search:
+    enabled: true
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "**/.cursorrules"
+      - "**/CODING_STANDARDS.md"
+
