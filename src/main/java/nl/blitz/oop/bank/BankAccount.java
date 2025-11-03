@@ -31,7 +31,7 @@ public class BankAccount {
         }
         this.holder = holder;
 
-        if (balance < 0) {
+        if (initialBalance < 0) {
             throw new IllegalArgumentException("Balance cannot start negative");
         }
         this.balance = initialBalance;
@@ -57,7 +57,7 @@ public class BankAccount {
      */
     public void deposit(double amount) {
         // throw new UnsupportedOperationException("TODO: implement deposit()");
-        if (amount < 0) {
+        if (amount <= 0) {
             throw new IllegalArgumentException("deposit has to be a positive amount");
         }
         double new_balance = this.balance + amount;
