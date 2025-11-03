@@ -2,7 +2,9 @@
 
 ## Story
 
-Blitz Community Bank keeps getting support calls: customers accidentally deposit negative amounts, typo a giant withdrawal, or overdraw their accounts. The bank wants a tiny, reliable component that always validates amounts and never exposes the balance directly.
+Blitz Community Bank keeps getting support calls: customers accidentally deposit negative amounts, 
+typo a giant withdrawal, or overdraw their accounts. The bank wants a tiny, reliable component that 
+always validates amounts and never exposes the balance directly.
 
 You're hired to build a safe BankAccount system that prevents errors and keeps data consistent.
 
