@@ -53,7 +53,7 @@ public class BankAccount {
      * @throws IllegalArgumentException if amount <= 0
      */
     public void deposit(double amount) {
-        if (amount < 0) {
+        if (amount <= 0) {
             throw new IllegalArgumentException("Deposit amount must be positive.");
         }
         balance += amount;
