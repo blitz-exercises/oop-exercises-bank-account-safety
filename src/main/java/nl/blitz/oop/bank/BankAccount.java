@@ -12,61 +12,77 @@ package nl.blitz.oop.bank;
  * - printSummary(): "Account: {holder} | Balance: {balance}"
  */
 public class BankAccount {
-    // TODO: make these fields private (holder immutable, balance mutable)
-    private String holder;
+    // Fields: holder immutable, balance mutable
+    private final String holder;
     private double balance;
 
     /**
-     * TODO:
-     * - Validate inputs
-     *   - holder non-null/non-blank
-     *   - initialBalance >= 0
-     * - Throw IllegalArgumentException if invalid
-     * - Otherwise, assign to fields
+     * Constructs a BankAccount after validating inputs.
+     * 
+     * @param holder         the account holder's name (non-null, non-blank)
+     * @param initialBalance the starting balance (>= 0)
+     * @throws IllegalArgumentException if inputs are invalid
      */
     public BankAccount(String holder, double initialBalance) {
-        throw new UnsupportedOperationException("TODO: implement constructor validation and assignment");
+        if (holder == null || holder.isBlank()) {
+            throw new IllegalArgumentException("Holder cannot be null or blank.");
+        }
+
+        if (initialBalance < 0) {
+            throw new IllegalArgumentException("Initial balance cannot be negative.");
+        }
+
+        this.holder = holder;
+        this.balance = initialBalance;
     }
 
-    // TODO: return account holder name
+    // Return account holder name
     public String getHolder() {
-        throw new UnsupportedOperationException("TODO: implement getHolder()");
+        return holder;
     }
 
-    // TODO: return current balance
+    // Return current balance
     public double getBalance() {
-        throw new UnsupportedOperationException("TODO: implement getBalance()");
+        return balance;
     }
 
     /**
-     * TODO:
      * Deposit a positive amount.
-     * - amount must be > 0, otherwise throw IllegalArgumentException
-     * - add amount to balance
+     * 
+     * @param amount must be > 0
+     * @throws IllegalArgumentException if amount <= 0
      */
     public void deposit(double amount) {
-        throw new UnsupportedOperationException("TODO: implement deposit()");
+        if (amount < 0) {
+            throw new IllegalArgumentException("Deposit amount must be positive.");
+        }
+        balance += amount;
     }
 
     /**
-     * TODO:
      * Withdraw a valid amount.
-     * - amount > 0
-     * - amount <= balance
-     * - update balance
-     * - otherwise throw IllegalArgumentException
+     * 
+     * @param amount must be > 0 and <= balance
+     * @throws IllegalArgumentException if invalid
      */
     public void withdraw(double amount) {
-        throw new UnsupportedOperationException("TODO: implement withdraw()");
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Withdrawal amount must be positive.");
+        }
+
+        if (amount > balance) {
+            throw new IllegalArgumentException("Insufficient balance.");
+        }
+
+        balance -= amount;
     }
 
     /**
-     * TODO:
-     * Return a string like:
-     * "Account: {holder} | Balance: {balance}"
+     * Return a string summary of the account.
+     * 
+     * @return summary string: "Account: {holder} | Balance: {balance}"
      */
     public String printSummary() {
-        throw new UnsupportedOperationException("TODO: implement printSummary()");
+        return "Account: " + holder + " | Balance: " + balance;
     }
 }
-
